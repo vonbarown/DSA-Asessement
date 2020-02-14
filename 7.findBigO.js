@@ -1,4 +1,4 @@
-// Q7
+// Q7.
 // What is the runtime of the following code? Explain your reasoning.
 // Answer on canvas
 

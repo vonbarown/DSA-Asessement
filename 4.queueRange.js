@@ -1,3 +1,6 @@
+// Q4.
+// Write a function `range` that takes in a Queue of numbers, returns the range (difference between the minimum and maximum).
+
 class Queue {
   constructor() {
     this.array = []
@@ -24,7 +27,7 @@ class Queue {
   }
 }
 
-// Build the queue
+// Fill up the queue
 let q = new Queue()
 q.enqueue(-145)
 q.enqueue(45)

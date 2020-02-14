@@ -1,3 +1,6 @@
+// Q3.
+// Write a function sum that takes a Stack of numbers as input, and returns the sum of all elements.
+
 class Stack {
   constructor() {
     this.arr = []

@@ -24,6 +24,15 @@ n4.next = n5
 // Implement your code to traverse
 const traverse = (node) => {
 
+  if (node.next === null) {
+    return node.val
+  }
+
+  if (node.next !== null) {
+    console.log(node.val);
+  }
+
+  traverse(node.next)
 }
 
 // example

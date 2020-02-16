@@ -16,12 +16,18 @@ const occurrenceFilter = (arr, n) => {
         let key = arr[i]
         if (!dupes[key]) {
             dupes[key] = counter
-            filtered.push(arr[i])
         }
         dupes[key] += 1
-    }
-    return dupes
-}
 
+    }
+
+    for (let val in dupes) {
+        if (dupes[val] >= n) {
+            filtered.push(Number(val))
+        }
+
+    }
+    return filtered
+}
 console.log(occurrenceFilter([1, 3, 4, 1, 9, 1, 3, 4, 3, 1, 2], 3));
  // Returns [1, 3]

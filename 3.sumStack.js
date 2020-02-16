@@ -34,7 +34,7 @@ s.push(14)
 
 // Implement your function here
 const sum = (stack) => {
-
+  return stack.arr.reduce((acc, cur) => acc += cur)
 }
 
-sum(s) // should return 482
+console.log(sum(s)) // should return 482

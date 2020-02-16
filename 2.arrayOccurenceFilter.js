@@ -8,7 +8,20 @@
 // Output: [1,3]
 
 const occurrenceFilter = (arr, n) => {
+    let dupes = {}
+    let filtered = []
+    let counter = 0
 
+    for (let i = 0; i < arr.length; i++) {
+        let key = arr[i]
+        if (!dupes[key]) {
+            dupes[key] = counter
+            filtered.push(arr[i])
+        }
+        dupes[key] += 1
+    }
+    return dupes
 }
 
-occurrenceFilter([1, 3, 4, 1, 9, 1, 3, 4, 3, 1, 2], 3) // Returns [1, 3]
+console.log(occurrenceFilter([1, 3, 4, 1, 9, 1, 3, 4, 3, 1, 2], 3));
+ // Returns [1, 3]

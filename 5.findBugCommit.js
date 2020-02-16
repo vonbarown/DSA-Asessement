@@ -110,20 +110,24 @@ let commits = [
 
 const identifyFirstBadCommit = (commits) => {
 
-  let start = 0
-  let end = commits.length - 1
+  let i = 0
 
-  while (start <= end) {
-    let mid = Math.floor((end + start) / 2)
+  // while (i <= commits.length) {
+  //   if (commits[i].status === 'bad') {
+  //     console.log('hello');
 
-    if (commits[mid].status !== 'bad') {
-      return commits[mid].timestamp.toLocaleString()
+  //   }
+  // }
+  for (let i = 0; i < commits.length; i++) {
+    if (commits[i].status === 'bad') {
+      return {
+        commit: commits[i],
+        index: i
+      }
     }
-    // if (condition) {
 
-    // }
   }
-  // console.log(commits[mid]);
+
 
 }
 

@@ -34,11 +34,12 @@ s.push(14)
 
 // Implement your function here
 const sum = (stack) => {
-  if (stack.isEmpty()) {
-    return
+  let count = 0
+  while (!stack.isEmpty()){
+    let test = stack.pop()    
+    count +=test
   }
-
-  return stack.arr.reduce((acc, cur) => acc += cur)
+  return count
 }
 
 console.log(sum(s)) // should return 482

@@ -31,6 +31,9 @@ const traverse = (node) => {
   if (node.next !== null) {
     console.log(node.val);
   }
+  if (node.next.next === null) {
+    console.log(node.next.val);
+  }
 
   traverse(node.next)
 }

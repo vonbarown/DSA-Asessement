@@ -5,15 +5,23 @@
 
 
 const recursiveSum = (arr, i = 0) => {
-    let sum = 0;
-    console.log(sum + arr[i]);
-    if (i === arr.length) {
-        return arr[i]
+    if (i >= arr.length) {
+        return
+    }
+    let sum = 0
+    // sum += arr[i]
+
+    // sum += sum
+    // console.log(sum);
+    while (i < arr.length) {
+        sum += arr[i]
     }
 
-    return recursiveSum(arr, i + 1)
+    // console.log(sum);
+
+    recursiveSum(arr, i + 1)
 }
 
 const arr1 = [5, 2, 9, 11]
-console.log(recursiveSum(arr1));
+recursiveSum(arr1);
  // should return 27

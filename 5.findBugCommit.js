@@ -110,9 +110,25 @@ let commits = [
 
 const identifyFirstBadCommit = (commits) => {
 
+  let start = 0
+  let end = commits.length - 1
+
+  while (start <= end) {
+    let mid = Math.floor((end + start) / 2)
+
+    if (commits[mid].status !== 'bad') {
+      return commits[mid].timestamp.toLocaleString()
+    }
+    // if (condition) {
+
+    // }
+  }
+  // console.log(commits[mid]);
+
 }
 
-identifyFirstBadCommit(commits)
+console.log(identifyFirstBadCommit(commits));
+
 
 // should return:
 //  {

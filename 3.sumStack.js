@@ -31,13 +31,14 @@ s.push(267)
 s.push(88)
 s.push(91)
 s.push(14)
+s.push(10)
+s.push(18)
 
 // Implement your function here
 const sum = (stack) => {
   let count = 0
-  while (!stack.isEmpty()){
-    let test = stack.pop()    
-    count +=test
+  while (!stack.isEmpty()){   
+    count += stack.pop()
   }
   return count
 }

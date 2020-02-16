@@ -110,14 +110,6 @@ let commits = [
 
 const identifyFirstBadCommit = (commits) => {
 
-  let i = 0
-
-  // while (i <= commits.length) {
-  //   if (commits[i].status === 'bad') {
-  //     console.log('hello');
-
-  //   }
-  // }
   for (let i = 0; i < commits.length; i++) {
     if (commits[i].status === 'bad') {
       return {

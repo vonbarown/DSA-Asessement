@@ -33,9 +33,30 @@ q.enqueue(-145)
 q.enqueue(45)
 q.enqueue(11)
 q.enqueue(98)
+q.enqueue(100)
 
 // Write your function here
 const range = (queue) => {
+  // console.log('queue', queue);
+
+  if (queue.isEmpty()) {
+    return
+  }
+
+  let arr = queue.array
+  let max = arr[0]
+  let min = arr[0]
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] < arr[i + 1]) {
+      max = arr[i + 1]
+    }
+    if (min > arr[i]) {
+      min = arr[i]
+    }
+  }
+
+  console.log(max - min);
 
 }
 

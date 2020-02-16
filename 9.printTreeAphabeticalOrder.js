@@ -1,11 +1,11 @@
 // Q9.
 // Print the following tree in alphabetical order https://drive.google.com/uc?id=1WiTdeqPgpQlgCBgSuwRGCcjajAO3JHNw&export=download
-
 // Another text visualization of the tree could be
 //           (F)
 //     (D)       (J)
 //   (B) (E)  (H)   (K)
 // (A)(C)   (G) (I)
+// The tree is already built for you in the code below.
 
 class BinaryTreeNode {
   constructor(val) {

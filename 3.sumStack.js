@@ -34,6 +34,10 @@ s.push(14)
 
 // Implement your function here
 const sum = (stack) => {
+  if (stack.isEmpty()) {
+    return
+  }
+
   return stack.arr.reduce((acc, cur) => acc += cur)
 }
 

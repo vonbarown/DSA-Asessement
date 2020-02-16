@@ -33,7 +33,7 @@ q.enqueue(-145)
 q.enqueue(45)
 q.enqueue(11)
 q.enqueue(98)
-q.enqueue(100)
+// q.enqueue(100)
 
 // Write your function here
 const range = (queue) => {
@@ -48,8 +48,8 @@ const range = (queue) => {
   let min = arr[0]
 
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i] < arr[i + 1]) {
-      max = arr[i + 1]
+    if (max < arr[i]) {
+      max = arr[i]
     }
     if (min > arr[i]) {
       min = arr[i]

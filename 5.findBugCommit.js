@@ -110,20 +110,42 @@ let commits = [
 
 const identifyFirstBadCommit = (commits) => {
 
-  for (let i = 0; i < commits.length; i++) {
-    if (commits[i].status === 'bad') {
-      return {
-        commit: commits[i],
-        index: i
-      }
+  // for (let i = 0; i < commits.length; i++) {
+  //   if (commits[i].status === 'bad') {
+  //     return {
+  //       commit: commits[i],
+  //       index: i
+  //     }
+  //   }
+
+  // }
+  let start = 0
+  let end = commits.length - 1
+
+  while (start <= end) {
+    let mid = Math.floor((end + start) / 2)
+
+    let currCommit = commits[mid]
+    let prevCommit = commits[mid - 1]
+    // console.log('cur', currCommit);
+    // console.log('prev', prevCommit);
+
+    if (prevCommit.status === 'good' && currCommit.status === 'bad') {
+      console.log({
+        commit: currCommit,
+        index: mid
+      });
+
+    } else if (currCommit.status === ' bad') {
+      end = mid - 1
+    } else {
+      start = mid + 1
     }
 
   }
-
-
 }
 
-console.log(identifyFirstBadCommit(commits));
+identifyFirstBadCommit(commits);
 
 
 // should return:

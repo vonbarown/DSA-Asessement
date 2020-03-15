@@ -43,16 +43,29 @@ const range = (queue) => {
     return
   }
 
-  let arr = queue.array
-  let max = arr[0]
-  let min = arr[0]
+  // let arr = queue.array
+  // let max = arr[0]
+  // let min = arr[0]
 
-  for (let i = 0; i < arr.length; i++) {
-    if (max < arr[i]) {
-      max = arr[i]
-    }
-    if (min > arr[i]) {
-      min = arr[i]
+  // for (let i = 0; i < arr.length; i++) {
+  //   if (max < arr[i]) {
+  //     max = arr[i]
+  //   }
+  //   if (min > arr[i]) {
+  //     min = arr[i]
+  //   }
+  // }
+
+  let min = queue.peek()
+  let max = queue.peek()
+
+  while (!queue.isEmpty()) {
+    let curr = queue.dequeue()
+
+    if (curr > max) {
+      max = curr
+    } else if (curr < min) {
+      min = curr
     }
   }
 

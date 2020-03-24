@@ -122,49 +122,6 @@ console.log(duplicates(arr1, arr2));
 //making an anagram
 const makeAnagram = (a, b) => {
   if (!a || !b) return 0;
-  if (a.length === 0 && a.length === 0) return 0;
-  if (a === b) return 0;
-
-  let strObj1 = {};
-  let strObj2 = {};
-  let sum1 = 0;
-  let sum2 = 0;
-
-  for (let i = 0; i < a.length; i++) {
-    strObj1[a[i]] = strObj1[a[i]] ? strObj1[a[i]] + 1 : 1;
-  }
-  for (let i = 0; i < b.length; i++) {
-    strObj2[b[i]] = strObj2[b[i]] ? strObj2[b[i]] + 1 : 1;
-  }
-  for (let i = 0; i < a.length; i++) {
-    if (strObj2.hasOwnProperty(a[i])) {
-      strObj2[a[i]]--;
-      if (strObj2[a[i]] === 0) {
-        delete strObj2[a[i]];
-      }
-    }
-  }
-
-  for (let i = 0; i < b.length; i++) {
-    if (strObj1.hasOwnProperty(b[i])) {
-      strObj1[b[i]]--;
-      if (strObj1[b[i]] === 0) {
-        delete strObj1[b[i]];
-      }
-    }
-  }
-
-  for (let key in strObj1) {
-    sum1 += strObj1[key];
-  }
-  for (let key in strObj2) {
-    sum2 += strObj2[key];
-  }
-  return sum1 + sum2;
-};
-//making an anagram
-const makeAnagram = (a, b) => {
-  if (!a || !b) return 0;
   if (a === b) return 0;
 
   let strObj = {};
@@ -178,7 +135,7 @@ const makeAnagram = (a, b) => {
   }
   let total = 0;
   for (let key in strObj) {
-    if (strObj[key] {
+    if (strObj[key]) {
       total += Math.abs(strObj[key]);
     }
   }
@@ -188,36 +145,121 @@ const makeAnagram = (a, b) => {
 };
 
 //sherlock valid string
-if (!s.length) return 0;
+const SherlockValidStr = s => {
+  if (!s.length) return 0;
 
-let output = [];
-let strObj = {};
-let count = 0;
+  let strObj = {};
+  let count = 0;
 
-for (let i = 0; i < s.length; i++) {
-  if (strObj[s[i]]) {
-    strObj[s[i]] += 1;
+  for (let i = 0; i < s.length; i++) {
+    if (strObj[s[i]]) {
+      strObj[s[i]] += 1;
+    } else {
+      strObj[s[i]] = 1;
+    }
+  }
+
+  let values = Object.values(strObj);
+  let diff = Math.max(...values) - Math.min(...values);
+
+  for (let j = 1; j < values.length; j++) {
+    if (values[0] !== values[j]) {
+      count++;
+    }
+  }
+
+  console.log("obj", strObj);
+  console.log("arr", values);
+  console.log("count", count);
+  console.log("diff", diff);
+
+  if (count <= 1 && (values[values.length - 1] === 1 || diff <= 1)) {
+    return "YES";
   } else {
-    strObj[s[i]] = 1;
+    return "NO";
   }
-}
+};
 
-let values = Object.values(strObj);
-let diff = Math.max(...values) - Math.min(...values);
+//toeplitz check
+let a = [
+  [1, 2, 3, 4],
+  [5, 3, 2, 3],
+  [6, 5, 1, 2]
+];
 
-for (let j = 1; j < values.length; j++) {
-  if (values[0] !== values[j]) {
-    count++;
+let c = [
+  [1, 2, 3, 4],
+  [5, 1, 2, 3],
+  [6, 5, 1, 2]
+];
+
+let b = [
+  [1, 2, 3, 4],
+  [5, 1, 2, 3],
+  [6, 5, 1, 2],
+  [6, 5, 5, 1],
+  [6, 5, 1, 5]
+];
+
+let d = [
+  [1, 2, 3, 4],
+  [5, 1, 2, 3],
+  [6, 2, 1, 2],
+  [6, 5, 5, 1],
+  [6, 5, 1, 5]
+];
+//matrix[a][matrix[a].length - 1]
+const toeplitzChecker = matrix => {
+  let height = matrix.length;
+  let width = matrix[0].length;
+
+  let small = width >= height ? height : width;
+  let big = width <= height ? height : width;
+  big = big - small + 1;
+
+  let direction = width > height;
+
+  for (let i = 0; i < big; i++) {
+    let diagnol = {};
+    for (let j = 0; j < small; j++) {
+      if (direction) {
+        diagnol[matrix[j][i + j]] = true;
+      } else {
+        diagnol[matrix[i + j][j]] = true;
+      }
+    }
+    if (Object.keys(diagnol).length > 1) return false;
   }
-}
 
-console.log("obj", strObj);
-console.log("arr", values);
-console.log("count", count);
-console.log("diff", diff);
+  return true;
+};
 
-if (count <= 1 && (values[values.length - 1] === 1 || diff <= 1)) {
-  return "YES";
-} else {
-  return "NO";
-}
+console.log(toeplitzChecker(a));
+console.log(toeplitzChecker(b));
+console.log(toeplitzChecker(c));
+console.log(toeplitzChecker(d));
+
+//tictac toe
+let input = [
+  ["X", "O", "O"],
+  ["X", "X", " "],
+  ["O", "O", "X"]
+];
+const checkTicTacToe = matrix => {
+  if (matrix[0][0] === matrix[1][1] && matrix[1][1] === matrix[2][2]) {
+    if (" " !== matrix[1][1]) return matrix[1][1];
+  }
+  if (matrix[0][2] === matrix[1][1] && matrix[1][1] === matrix[2][0]) {
+    if (" " !== matrix[1][1]) return matrix[1][1];
+  }
+  for (let i = 0; i < 3; i++) {
+    if (matrix[i][0] === matrix[i][1] && matrix[i][0] === matrix[i][2]) {
+      if (" " !== matrix[i][1]) return matrix[i][1];
+    }
+    if (matrix[0][i] === matrix[1][i] && matrix[0][i] === matrix[2][i]) {
+      if (" " !== matrix[1][i]) return matrix[1][i];
+    }
+  }
+  return;
+  // console.log(obj)
+};

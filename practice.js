@@ -263,3 +263,211 @@ const checkTicTacToe = matrix => {
   return;
   // console.log(obj)
 };
+
+//max profit
+const maxProfit = prices => {
+  let maxprofit = 0;
+
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] > prices[i - 1]) maxprofit += prices[i] - prices[i - 1];
+
+    console.log(maxprofit);
+  }
+  return maxprofit;
+};
+
+const findPermutations = string => {
+  //check if the user enters a valid string
+  // checks if the input is empty or type is not a string
+  //output error message
+  if (!string || typeof string !== "string") {
+    return "Error, invalid input";
+  }
+
+  //check if the string is too short to perform op
+  //returns itself
+  if (string.length < 2) {
+    return string;
+  }
+
+  //init an array to hold all the different permutations
+  let stack = [];
+
+  //looping through the string to check each character
+  for (let i = 0; i < string.length; i++) {
+    //variable to hold current character
+    let char = string[i];
+
+    //preventing repeating of permutations when duplicate letters
+    if (string.indexOf(char) !== i) continue;
+
+    //holding the remaining characters by slice off the rest of the string from char
+    let remainingChar = string.slice(0, i) + string.slice(i + 1, string.length);
+
+    //calling the function recursively of the remaining characters
+    for (let permutation of findPermutations(remainingChar))
+      stack.push(char + permutation);
+  }
+
+  return stack;
+};
+console.log("permutation");
+//permutation
+console.log(findPermutations("voniel"));
+
+//valid parenthesis
+const isValid = s => {
+  let stack = [];
+  let map = {
+    "(": ")",
+    "[": "]",
+    "{": "}"
+  };
+
+  for (let i = 0; i < s.length; i++) {
+    // If character is an opening brace add it to a stack
+    if (s[i] === "(" || s[i] === "{" || s[i] === "[") {
+      stack.push(s[i]);
+    }
+    //  If that character is a closing brace, pop from the stack, which will also reduce the length of the stack each time a closing bracket is encountered.
+    else {
+      let last = stack.pop();
+
+      //If the popped element from the stack, which is the last opening brace doesn’t match the corresponding closing brace in the map, then return false
+      if (s[i] !== map[last]) {
+        return false;
+      }
+    }
+  }
+
+  // By the completion of the for loop after checking all the brackets of the str, at the end, if the stack is not empty then fail
+  if (stack.length !== 0) {
+    return false;
+  }
+
+  return true;
+};
+//converting 12 hour time into 24 hour format
+const timeConversion = s => {
+  let PM = s.match("PM") ? true : false;
+  let hour;
+  let second;
+  s = s.split(":");
+  let min = s[1];
+
+  if (PM) {
+    hour = 12 + parseInt(s[0], 10);
+    second = s[2].replace("PM", "");
+  } else {
+    hour = s[0];
+    second = s[2].replace("AM", "");
+  }
+
+  return hour + ":" + min + ":" + second;
+};
+
+const findMedianSortedArrays = (nums1, nums2) => {
+  let arr = nums1.concat(nums2);
+
+  const mid = Math.floor(arr.length / 2),
+    nums = [...arr].sort((a, b) => a - b);
+
+  return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
+};
+
+const strStr = (haystack, needle) => {
+  if (haystack.length < 1 && needle.length < 1) {
+    return 0;
+  }
+  if (haystack.length < 1) {
+    return -1;
+  }
+
+  if (needle.length < 1) {
+    return 0;
+  }
+
+  let nIndex = 0;
+
+  for (let i = 0; i < haystack.length; i++) {
+    if (haystack[i] === needle[nIndex]) {
+      if (nIndex === needle.length - 1) {
+        return i - nIndex;
+      } else {
+        nIndex++;
+      }
+    } else if (nIndex > 0) {
+      i = i - nIndex;
+      nIndex = 0;
+    }
+  }
+
+  return -1;
+};
+
+const hasChange = arr => {
+  if (!arr.length) return true;
+
+  // initializing js object
+  let changeObj = {
+    5: 0,
+    10: 0,
+    20: 0
+  };
+
+  // looping through array and create obj key value pair
+  for (let i = 0; i < arr.length; i++) {
+    switch (arr[i]) {
+      case 5:
+        changeObj[5] += 1;
+        break;
+      case 10:
+        changeObj[10] += 1;
+        changeObj[5] -= 1;
+        break;
+      case 20:
+        changeObj[20] += 1;
+        if (changeObj[5] > 1 && changeObj[10] > 1) {
+          changeObj[10] -= 1;
+          changeObj[5] -= 1;
+        } else if (changeObj[5] >= 3) {
+          changeObj[5] -= 3;
+        }
+        break;
+    }
+    if (changeObj[5] < 0 || changeObj[10] < 0) {
+      return false;
+    }
+  }
+  return true;
+  console.log(changeObj);
+};
+
+let testArray = [5, 5, 5, 20];
+
+// hasChange(testArray);
+
+//merging two sorted linked list
+const mergeTwoSortedLists = (l1, l2) => {
+  // creating a new head pointer for the merged linked list
+  let mergedLLHead = { val: -1, next: null };
+  let pointer = mergedLLHead;
+
+  while (l1 && l2) {
+    if (l1.val > l2.val) {
+      pointer.next = l2;
+      l2 = l2.next;
+    } else {
+      pointer.next = l1;
+      l1 = l1.next;
+    }
+    pointer = pointer.next;
+  }
+
+  // l1 = 1->2->3, l2 = 10->20->30
+  // In that case l1, will point to null and while loop will break
+  // Simply point pointer to l2. We do not have to add individual nodes
+  pointer.next = l1 || l2;
+
+  return mergedLLHead.next;
+};

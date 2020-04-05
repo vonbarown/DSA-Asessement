@@ -1,6 +1,6 @@
 let sortedArray = [1, 2, 2, 3, 4, 5, 5, 6, 7, 7];
 
-const removeDuplicates = arr => {
+const removeDuplicates = (arr) => {
   if (!arr) return 0;
 
   let slow = 0;
@@ -44,13 +44,13 @@ const twoSumEff = (nums, target) => {
 
 // console.log(twoSumEff(nums, 12));
 
-const hourglassSum = arr => {
+const hourglassSum = (arr) => {
   let hourglasses = [];
 
   if (
     typeof arr === "object" &&
     arr.length === 6 &&
-    arr.map(i => i.length).reduce((p, n) => p + n) === 36
+    arr.map((i) => i.length).reduce((p, n) => p + n) === 36
   ) {
     for (let row = 0; row <= 3; row++) {
       let sum = 0;
@@ -76,11 +76,11 @@ let sample = [
   [1, 1, 1, 0, 0, 0],
   [0, 0, 2, 4, 4, 0],
   [0, 0, 0, 2, 0, 0],
-  [0, 0, 1, 2, 4, 0]
+  [0, 0, 1, 2, 4, 0],
 ];
 console.log(hourglassSum(sample));
 
-const diagonalDifference = arr => {
+const diagonalDifference = (arr) => {
   if (!arr.length) return 0;
 
   let diagonal1 = 0,
@@ -107,7 +107,7 @@ const duplicates = (arr1, arr2) => {
   let dups = new Set(arr1);
 
   let output = [];
-  arr2.forEach(el => {
+  arr2.forEach((el) => {
     if (dups.has(el)) {
       output.push(el);
     } else {
@@ -145,7 +145,7 @@ const makeAnagram = (a, b) => {
 };
 
 //sherlock valid string
-const SherlockValidStr = s => {
+const SherlockValidStr = (s) => {
   if (!s.length) return 0;
 
   let strObj = {};
@@ -184,13 +184,13 @@ const SherlockValidStr = s => {
 let a = [
   [1, 2, 3, 4],
   [5, 3, 2, 3],
-  [6, 5, 1, 2]
+  [6, 5, 1, 2],
 ];
 
 let c = [
   [1, 2, 3, 4],
   [5, 1, 2, 3],
-  [6, 5, 1, 2]
+  [6, 5, 1, 2],
 ];
 
 let b = [
@@ -198,7 +198,7 @@ let b = [
   [5, 1, 2, 3],
   [6, 5, 1, 2],
   [6, 5, 5, 1],
-  [6, 5, 1, 5]
+  [6, 5, 1, 5],
 ];
 
 let d = [
@@ -206,10 +206,10 @@ let d = [
   [5, 1, 2, 3],
   [6, 2, 1, 2],
   [6, 5, 5, 1],
-  [6, 5, 1, 5]
+  [6, 5, 1, 5],
 ];
 //matrix[a][matrix[a].length - 1]
-const toeplitzChecker = matrix => {
+const toeplitzChecker = (matrix) => {
   let height = matrix.length;
   let width = matrix[0].length;
 
@@ -243,9 +243,9 @@ console.log(toeplitzChecker(d));
 let input = [
   ["X", "O", "O"],
   ["X", "X", " "],
-  ["O", "O", "X"]
+  ["O", "O", "X"],
 ];
-const checkTicTacToe = matrix => {
+const checkTicTacToe = (matrix) => {
   if (matrix[0][0] === matrix[1][1] && matrix[1][1] === matrix[2][2]) {
     if (" " !== matrix[1][1]) return matrix[1][1];
   }
@@ -265,7 +265,7 @@ const checkTicTacToe = matrix => {
 };
 
 //max profit
-const maxProfit = prices => {
+const maxProfit = (prices) => {
   let maxprofit = 0;
 
   for (let i = 1; i < prices.length; i++) {
@@ -276,7 +276,11 @@ const maxProfit = prices => {
   return maxprofit;
 };
 
-const findPermutations = string => {
+console.log("max profit");
+
+maxProfit([7, 4, 5, 9, 2, 6, 1]);
+
+const findPermutations = (string) => {
   //check if the user enters a valid string
   // checks if the input is empty or type is not a string
   //output error message
@@ -316,12 +320,12 @@ console.log("permutation");
 console.log(findPermutations("voniel"));
 
 //valid parenthesis
-const isValid = s => {
+const isValid = (s) => {
   let stack = [];
   let map = {
     "(": ")",
     "[": "]",
-    "{": "}"
+    "{": "}",
   };
 
   for (let i = 0; i < s.length; i++) {
@@ -348,7 +352,7 @@ const isValid = s => {
   return true;
 };
 //converting 12 hour time into 24 hour format
-const timeConversion = s => {
+const timeConversion = (s) => {
   let PM = s.match("PM") ? true : false;
   let hour;
   let second;
@@ -405,14 +409,14 @@ const strStr = (haystack, needle) => {
   return -1;
 };
 
-const hasChange = arr => {
+const hasChange = (arr) => {
   if (!arr.length) return true;
 
   // initializing js object
   let changeObj = {
     5: 0,
     10: 0,
-    20: 0
+    20: 0,
   };
 
   // looping through array and create obj key value pair
@@ -470,4 +474,22 @@ const mergeTwoSortedLists = (l1, l2) => {
   pointer.next = l1 || l2;
 
   return mergedLLHead.next;
+};
+
+const lengthOfLongestSubstring = (s) => {
+  let longestStrLength = 0;
+  let currentStr = "";
+  for (i in s) {
+    let char = s[i];
+    let charPos = currentStr.indexOf(char);
+    if (charPos === -1) {
+      currentStr += char;
+      console.log(currentStr);
+    } else {
+      longestStrLength = Math.max(longestStrLength, currentStr.length);
+      currentStr = currentStr.substring(charPos + 1) + char;
+    }
+  }
+  longestStrLength = Math.max(longestStrLength, currentStr.length);
+  return longestStrLength;
 };

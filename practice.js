@@ -409,47 +409,54 @@ const strStr = (haystack, needle) => {
   return -1;
 };
 
-const hasChange = (arr) => {
-  if (!arr.length) return true;
+//has change function
+const hathChange = (arr) => {
+  if (!arr) return true;
 
-  // initializing js object
-  let changeObj = {
+  //initialize empty register as an object with key of denomination
+  //values as the amount in register
+  let register = {
     5: 0,
     10: 0,
     20: 0,
   };
 
-  // looping through array and create obj key value pair
+  //looping through input array to check each individual elemen
   for (let i = 0; i < arr.length; i++) {
+    //switch statement to increment or decrement the values base don what is
+    //in the register
     switch (arr[i]) {
       case 5:
-        changeObj[5] += 1;
+        register[5] += 1;
         break;
       case 10:
-        changeObj[10] += 1;
-        changeObj[5] -= 1;
+        register[5] -= 1;
+        register[10] += 1;
         break;
       case 20:
-        changeObj[20] += 1;
-        if (changeObj[5] > 1 && changeObj[10] > 1) {
-          changeObj[10] -= 1;
-          changeObj[5] -= 1;
-        } else if (changeObj[5] >= 3) {
-          changeObj[5] -= 3;
+        register[20] += 1;
+        if (register[5] >= 1 && register[10] >= 1) {
+          register[5] -= 1;
+          register[10] -= 1;
+        } else if (register[5] >= 3) {
+          register[5] -= 3;
         }
-        break;
-    }
-    if (changeObj[5] < 0 || changeObj[10] < 0) {
-      return false;
     }
   }
-  return true;
-  console.log(changeObj);
+
+  console.log(register);
+  //looping through the register object to check is there is any negatives
+  //if there is a negative value then register doesn't have change
+  for (let key in register) {
+    if (register[key] < 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 };
 
-let testArray = [5, 5, 5, 20];
-
-// hasChange(testArray);
+hathChange([5, 5, 5, 10, 20, 5, 10]);
 
 //merging two sorted linked list
 const mergeTwoSortedLists = (l1, l2) => {
@@ -492,4 +499,75 @@ const lengthOfLongestSubstring = (s) => {
   }
   longestStrLength = Math.max(longestStrLength, currentStr.length);
   return longestStrLength;
+};
+
+const gameOfLife = (board) => {
+  if (!board || !board[0]) {
+    return board;
+  }
+  helper(board, 0, 0);
+  return board;
+};
+
+const helper = (board, r, c) => {
+  if (!board[r]) return;
+  if (typeof board[r][c] === "undefined") return helper(board, r + 1, 0);
+
+  // `totalLiving` value for amount of total living neighbors
+  let totalLiving = 0;
+  for (let rr = r - 1; rr <= r + 1; rr++) {
+    if (typeof board[rr] === "undefined") continue;
+
+    for (let cc = c - 1; cc <= c + 1; cc++) {
+      if (board[rr][cc] === "undefined" || (rr == r && cc == c)) continue;
+
+      if (board[rr][cc] === 1) {
+        totalLiving += 1;
+      }
+    }
+  }
+
+  // run this function on next cell before using my `totalLiving` variable
+  helper(board, r, c + 1);
+
+  // after runnin this on the next cell, NOW set my value
+  if (totalLiving < 2 || totalLiving > 3) {
+    board[r][c] = 0;
+  } else if (totalLiving === 3) {
+    board[r][c] = 1;
+  }
+};
+
+function ListNode(val) {
+  this.val = val;
+  this.next = null;
+}
+
+//adding two numbers together that are linked list
+const addTwoNumbers = function (l1, l2) {
+  let node = null;
+  const carry = arguments[2];
+  if (l1 || l2) {
+    const val1 = l1 ? l1.val : 0;
+    const val2 = l2 ? l2.val : 0;
+    const next1 = l1 ? l1.next : null;
+    const next2 = l2 ? l2.next : null;
+    const val = carry ? val1 + val2 + 1 : val1 + val2;
+    node = new ListNode(val % 10);
+    node.next = addTwoNumbers(next1, next2, val >= 10);
+  } else if (carry) {
+    node = new ListNode(1);
+    node.next = null;
+  }
+  return node;
+};
+
+//finding median of two sorted arrays
+const findMedianSortedArrays = function (nums1, nums2) {
+  let arr = nums1.concat(nums2);
+
+  const mid = Math.floor(arr.length / 2),
+    nums = [...arr].sort((a, b) => a - b);
+
+  return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
 };

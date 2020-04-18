@@ -571,3 +571,43 @@ const findMedianSortedArrays = function (nums1, nums2) {
 
   return arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2;
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var increasingBST = function (root) {
+  let queue = [];
+
+  //calling the function to add to queue recursively
+  inorder(root, queue);
+
+  console.log(queue);
+
+  let newRoot = new TreeNode(queue[0]);
+
+  let pointer = newRoot;
+  queue.shift();
+
+  while (queue.length) {
+    pointer.right = new TreeNode(queue.shift());
+    pointer = pointer.right;
+  }
+
+  return newRoot;
+};
+
+const inorder = (node, arr) => {
+  if (!node) return;
+
+  inorder(node.left, arr);
+  arr.push(node.val);
+  inorder(node.right, arr);
+};

@@ -605,3 +605,35 @@ const inorder = (node, arr) => {
   arr.push(node.val);
   inorder(node.right, arr);
 };
+
+// array permutation
+var permute = function (nums) {
+  return dfs([], nums, new Set(), []);
+};
+
+const dfs = (stack, nums, seen, res) => {
+  if (stack.length === nums.length) {
+    console.log("sliced", stack.slice());
+
+    res.push(stack.slice());
+    return;
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    if (seen.has(nums[i])) continue;
+    console.log("seen", seen);
+
+    stack.push(nums[i]);
+    console.log("stacked", stack);
+    seen.add(nums[i]);
+
+    dfs(stack, nums, seen, res);
+    console.log("post recursive", stack);
+
+    stack.pop();
+
+    seen.delete(nums[i]);
+    console.log("seened", seen);
+  }
+  return res;
+};

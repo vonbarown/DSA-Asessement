@@ -459,28 +459,22 @@ const hathChange = (arr) => {
 hathChange([5, 5, 5, 10, 20, 5, 10]);
 
 //merging two sorted linked list
-const mergeTwoSortedLists = (l1, l2) => {
-  // creating a new head pointer for the merged linked list
-  let mergedLLHead = { val: -1, next: null };
-  let pointer = mergedLLHead;
-
-  while (l1 && l2) {
-    if (l1.val > l2.val) {
-      pointer.next = l2;
-      l2 = l2.next;
-    } else {
-      pointer.next = l1;
+let mergeTwoLists = (l1, l2) => {
+  let result = new ListNode(0);
+  let current = result;
+  while (l1 || l2) {
+    let min;
+    if (!l2 || (l1 && l1.val <= l2.val)) {
+      min = l1.val;
       l1 = l1.next;
+    } else if (!l1 || (l2 && l2.val <= l1.val)) {
+      min = l2.val;
+      l2 = l2.next;
     }
-    pointer = pointer.next;
+    current.next = new ListNode(min);
+    current = current.next;
   }
-
-  // l1 = 1->2->3, l2 = 10->20->30
-  // In that case l1, will point to null and while loop will break
-  // Simply point pointer to l2. We do not have to add individual nodes
-  pointer.next = l1 || l2;
-
-  return mergedLLHead.next;
+  return result.next;
 };
 
 const lengthOfLongestSubstring = (s) => {

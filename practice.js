@@ -637,3 +637,36 @@ const dfs = (stack, nums, seen, res) => {
   }
   return res;
 };
+
+//3sum
+var threeSum = function (nums) {
+  nums.sort((a, b) => a - b);
+
+  let res = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    let indexA = i + 1;
+    let indexB = nums.length - 1;
+
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+
+    while (indexA < indexB) {
+      let sum = nums[i] + nums[indexA] + nums[indexB];
+
+      if (sum < 0) {
+        indexA++;
+      } else if (sum > 0) {
+        indexB--;
+      } else {
+        res.push([nums[i], nums[indexA], nums[indexB]]);
+        while (nums[indexA] === nums[indexA + 1]) indexA++;
+        while (nums[indexB] === nums[indexB + 1]) indexB--;
+        indexA++;
+        indexB--;
+      }
+    }
+  }
+
+  console.log(nums);
+  return res;
+};

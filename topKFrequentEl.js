@@ -8,7 +8,6 @@ var topKFrequent = function (nums, k) {
   let res = [];
   let result = [];
   let resIndx = 0;
-  let resultIndx = 0;
 
   for (let i = 0; i < nums.length; i++) {
     let k = nums[i];

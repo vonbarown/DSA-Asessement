@@ -1,5 +1,5 @@
 class DynamicArray {
-  constructor(startLen) {
+  constructor(startLen = 2) {
     this.staticArr = new Array(startLen);
     // this.staticArr.length = startLen
     this.length = 0;
@@ -34,15 +34,18 @@ class DynamicArray {
 
   deleteElem(indx) {
     let temp = [];
-    let store = this.staticArr;
+    let store = this.staticArr; 
+    let deleted = store[indx]
 
     for (let i = 0; i < store.length; i++) {
       if (indx !== i) {
         temp[i] = store[i];
       }
     }
+    
+    this.staticArr = temp
 
-    return temp;
+    return deleted;
   }
 
   getElem(index) {

@@ -33,19 +33,26 @@ class DynamicArray {
   }
 
   deleteElem(indx) {
-    let temp = [];
-    let store = this.staticArr; 
-    let deleted = store[indx]
-
-    for (let i = 0; i < store.length; i++) {
-      if (indx !== i) {
-        temp[i] = store[i];
-      }
-    }
+  // let temp = []
+    // let store = this.staticArr
+    // let deleted = store[indx]
     
-    this.staticArr = temp
+    // for(let i = 0; i < store.length; i++){
+    //   if(indx !== i){
+    //     temp[i] = store[i]
+    //   }
+    // }
 
-    return deleted;
+    //  this.staticArr = temp
+
+    //  return deleted
+
+
+     vlet deleted = this.staticArr[indx]
+    
+     this.staticArr[indx] = undefined
+
+     return deleted
   }
 
   getElem(index) {

@@ -17,13 +17,15 @@ const matrixMax = (matrix) => {
 
   let combArr = [...rowSum, ...colSum]
 
-  return combArr.reduce((acc, currel) => {
-    if (acc > currel) {
-      return acc
-    } else {
-      return currel
-    }
-  })
+  // return combArr.reduce((acc, currel) => {
+  //   if (acc > currel) {
+  //     return acc
+  //   } else {
+  //     return currel
+  //   }
+  // })
+
+  return Math.max(...combArr)
 
 }
 
